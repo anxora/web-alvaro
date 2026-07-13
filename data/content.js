@@ -7,38 +7,10 @@ window.CONTENIDO = {
   },
   "notas": [
     {
-      "numero": 27,
-      "titulo": "Por qué España controló el centro del campo contra Italia",
-      "resumen": "España no ganó por los goles. Ganó porque en el mediocampo siempre tenía un hombre más. Así lo consiguieron.",
-      "texto": "España no ganó por los goles. Ganó porque en el mediocampo siempre tenía un hombre más.\n\nCuando Italia presionaba, el pivote de España bajaba entre los centrales y los laterales subían. Así siempre había un pase fácil.\n\nLo que aprendí: no hace falta correr más que el rival si te colocas mejor que él.",
-      "fecha": "2026-07-12"
-    },
-    {
-      "numero": 26,
-      "titulo": "Tres cosas que aprendí viendo al Arsenal",
-      "resumen": "Los laterales casi nunca pasaban del centro del campo a la vez. Ese pequeño detalle mantuvo al Arsenal seguro todo el partido.",
-      "texto": "Los laterales casi nunca pasaban del centro del campo a la vez.\n\nPrimera cosa: si un lateral ataca, el otro se queda. Segunda: el delantero centro baja a recibir para hacer sitio a los extremos. Tercera: los saques de esquina cortos no son miedo, son paciencia.\n\nEse pequeño detalle de los laterales mantuvo al Arsenal seguro todo el partido.",
-      "fecha": "2026-07-08"
-    },
-    {
-      "numero": 25,
-      "titulo": "Un futuro crack: ¿quién juega ya como una estrella?",
-      "resumen": "Esta semana vi a un extremo de 17 años que siempre mira por encima del hombro antes de recibir. Los ojeadores lo llaman escanear.",
-      "texto": "Esta semana vi a un extremo de 17 años que siempre mira por encima del hombro antes de recibir.\n\nLos ojeadores lo llaman escanear: saber lo que vas a hacer con el balón antes de que llegue. Los mejores del mundo escanean hasta 8 veces en los 10 segundos antes de recibir.\n\nApunta su nombre, porque dentro de dos años lo conocerá todo el mundo.",
-      "fecha": "2026-07-03"
-    },
-    {
       "numero": 67,
       "titulo": "¿Por que España ganará a Francia mañana en Mundial?",
       "resumen": "5 razones para creer en la victoria de España.",
-      "texto": "Te voy a dar 5 razones por las que creo que España va a ganar a Francia mañana en el mundial:\n\n- España tiene más precisión en el pase\n\n- El juego colectivo de España es superior y está en otro nivel\n\n- Lamine Jamal va a hacer su mejor partido\n\n- LA defensa de España",
-      "fecha": "2026-07-13"
-    },
-    {
-      "numero": 68,
-      "titulo": "Nuevo minuto",
-      "resumen": "",
-      "texto": "",
+      "texto": "Te voy a dar 5 razones por las que creo que España va a ganar a Francia mañana en el mundial:\n\n- España tiene más precisión en el pase\n\n- El juego colectivo de España es superior y está en otro nivel\n\n- Lamine Jamal va a hacer su mejor partido\n\n- España sólo ha encajado un gol en todo el mundial\n\n- La profundida de banquillo de España: No importa quién salga, lo hará bien",
       "fecha": "2026-07-13"
     }
   ],
@@ -58,7 +30,7 @@ window.CONTENIDO = {
   ],
   "sobreMi": {
     "saludo": "¡Hola! Soy Álvaro.",
-    "texto": "Empecé este diario con 8 años porque me encanta el fútbol. Cada semana veo partidos, aprendo algo nuevo y lo apunto. Mi objetivo es convertirme en uno de los mejores comunicadores de fútbol del mundo.",
+    "texto": "Empecé este diario con 8 años porque me encanta el fútbol. Cada semana veo partidos, aprendo algo nuevo y lo apunto. Mi objetivo es divertirme y conocer gente del mundo del fútbol.",
     "firma": "— Álvaro"
   },
   "pie": {
