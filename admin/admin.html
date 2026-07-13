@@ -109,9 +109,8 @@
         <textarea id="n-resumen"></textarea>
         <label>Texto completo</label>
         <textarea id="n-texto" class="grande" placeholder="Escribe el análisis. Deja una línea en blanco para separar párrafos."></textarea>
-        <p class="ayuda">Deja una línea en blanco entre párrafos. El artículo se ve en su propia página al hacer clic en la tarjeta.</p>
+        <p class="ayuda">Deja una línea en blanco entre párrafos. Los cambios se aplican solos mientras escribes; cuando termines, pulsa 💾 Guardar arriba.</p>
         <div class="editor-acciones">
-          <button class="btn-sec" onclick="aplicarNota()">Aplicar cambios al minuto</button>
           <button class="btn-peligro" onclick="borrarNota()">Eliminar este minuto</button>
         </div>
       </div>
@@ -159,8 +158,30 @@
   <script>
     let C = null;
     let notaSel = -1;
+    let sucio = false;
 
     const $ = (id) => document.getElementById(id);
+
+    function marcarSucio() {
+      sucio = true;
+      $("estado").textContent = "● Cambios sin guardar";
+    }
+
+    function marcarLimpio() {
+      sucio = false;
+      $("estado").textContent = "";
+    }
+
+    window.addEventListener("beforeunload", (e) => {
+      if (sucio) e.preventDefault();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "s") {
+        e.preventDefault();
+        guardar();
+      }
+    });
     const esc = (s) => String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 
     function aviso(msg, ms = 2600) {
@@ -181,6 +202,20 @@
       $("s-texto").value = C.sobreMi.texto;
       $("s-firma").value = C.sobreMi.firma;
       $("f-lema").value = C.pie.lema;
+
+      // aplicar en vivo lo que se escribe en el editor de minutos
+      ["n-numero", "n-fecha", "n-titulo", "n-resumen", "n-texto"].forEach((id) => {
+        $(id).addEventListener("input", () => {
+          if (notaSel >= 0) {
+            aplicarNotaSilencioso();
+            if (id === "n-titulo" || id === "n-numero" || id === "n-fecha") pintarNotas();
+          }
+        });
+      });
+
+      // cualquier edición marca cambios pendientes
+      document.addEventListener("input", marcarSucio);
+      marcarLimpio();
     }
 
     // ---- Minutos ----
@@ -216,18 +251,6 @@
       seleccionar(C.notas.length - 1);
     }
 
-    function aplicarNota() {
-      if (notaSel < 0) return;
-      const n = C.notas[notaSel];
-      n.numero = Number($("n-numero").value) || n.numero;
-      n.fecha = $("n-fecha").value || n.fecha;
-      n.titulo = $("n-titulo").value.trim();
-      n.resumen = $("n-resumen").value.trim();
-      n.texto = $("n-texto").value.trim();
-      pintarNotas();
-      aviso("Minuto actualizado. Recuerda Guardar 💾");
-    }
-
     function borrarNota() {
       if (notaSel < 0) return;
       const n = C.notas[notaSel];
@@ -236,6 +259,7 @@
       notaSel = -1;
       $("editor-nota").hidden = true;
       pintarNotas();
+      marcarSucio();
       aviso("Minuto eliminado. Recuerda Guardar 💾");
     }
 
@@ -293,7 +317,7 @@
       recogerFormulario();
       $("estado").textContent = "Guardando…";
       const r = await (await fetch("/api/save", { method: "POST", body: JSON.stringify(C) })).json();
-      $("estado").textContent = "";
+      if (r.ok) marcarLimpio(); else $("estado").textContent = "● Cambios sin guardar";
       aviso(r.ok ? "Guardado ✅ (mira la vista previa en «Ver la web»)" : "Error: " + r.error, 3500);
       pintarNotas();
     }
@@ -303,6 +327,7 @@
       $("estado").textContent = "Guardando…";
       const g = await (await fetch("/api/save", { method: "POST", body: JSON.stringify(C) })).json();
       if (!g.ok) { $("estado").textContent = ""; return aviso("Error al guardar: " + g.error, 4000); }
+      marcarLimpio();
       $("estado").textContent = "Publicando en GitHub…";
       const r = await (await fetch("/api/publish", { method: "POST" })).json();
       $("estado").textContent = "";
