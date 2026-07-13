@@ -60,6 +60,12 @@ body {
   letter-spacing: 0.01em;
 }
 
+.brand-name em,
+.footer-brand em {
+  font-style: normal;
+  color: var(--green);
+}
+
 .brand-tagline {
   font-size: 0.72rem;
   text-transform: uppercase;
