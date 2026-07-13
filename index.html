@@ -1,73 +1,77 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Alvaro — Todo sobre Fútbol</title>
+  <title>Alvaro's Notebook — The Beautiful Game, One Note at a Time</title>
+  <meta name="description" content="Football analysis, match reports and future stars — a young football analyst's journal.">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">⚽ Web Alvaro</a>
+      <a href="index.html" class="brand">
+        <span class="brand-name">Alvaro's Notebook</span>
+        <span class="brand-tagline">The Beautiful Game, One Note at a Time</span>
+      </a>
       <nav class="main-nav">
-        <a href="#noticias">Noticias</a>
-        <a href="#clasificacion">Clasificación</a>
-        <a href="#partidos">Partidos</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#notes">Notes</a>
+        <a href="#topics">Topics</a>
+        <a href="#about">About</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <h1>Toda la actualidad del fútbol</h1>
-      <p>Noticias, resultados, clasificaciones y análisis de las mejores ligas del mundo.</p>
-      <a href="#noticias" class="btn">Ver noticias</a>
+      <p class="hero-kicker">Football Analysis • Match Reports • Future Stars</p>
+      <h1>Every match teaches you something.<br>I write it down.</h1>
+      <p class="hero-sub">Hi! I'm Alvaro. Every week I watch football, learn something new and share what I discovered.</p>
+      <a href="#notes" class="btn">Read the notebook</a>
     </div>
   </section>
 
   <main class="container">
-    <section id="noticias" class="section">
-      <h2>Últimas noticias</h2>
-      <div class="cards" id="news-grid">
-        <!-- Las noticias se cargan desde js/app.js -->
+    <section id="notes" class="section">
+      <h2>Latest notes</h2>
+      <div class="notes-grid" id="notes-grid">
+        <!-- Notes are rendered from js/app.js -->
       </div>
     </section>
 
-    <section id="clasificacion" class="section">
-      <h2>Clasificación</h2>
-      <div class="table-wrap">
-        <table id="standings-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Equipo</th>
-              <th>PJ</th>
-              <th>G</th>
-              <th>E</th>
-              <th>P</th>
-              <th>Pts</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Se rellena desde js/app.js -->
-          </tbody>
-        </table>
+    <section id="topics" class="section">
+      <h2>What I write about</h2>
+      <div class="topics">
+        <div class="topic">
+          <h3>📋 Match analysis</h3>
+          <p>Not just the score — why a team controlled the midfield, where the game was won and lost.</p>
+        </div>
+        <div class="topic">
+          <h3>🧠 Tactics</h3>
+          <p>Formations, pressing, build-up play... the ideas behind the beautiful game, explained simply.</p>
+        </div>
+        <div class="topic">
+          <h3>⭐ Future stars</h3>
+          <p>Young talents to watch before everyone else knows their name.</p>
+        </div>
       </div>
     </section>
 
-    <section id="partidos" class="section">
-      <h2>Próximos partidos</h2>
-      <ul class="fixtures" id="fixtures-list">
-        <!-- Se rellena desde js/app.js -->
-      </ul>
+    <section id="about" class="section about">
+      <h2>About</h2>
+      <div class="about-card">
+        <p class="about-lead">Hi! I'm Alvaro.</p>
+        <p>I started this notebook when I was 8 years old because I love football. Every week I watch matches, learn something new and write it down. My goal is to become one of the best football communicators in the world.</p>
+        <p class="about-sign">— Alvaro</p>
+      </div>
     </section>
   </main>
 
-  <footer id="contacto" class="site-footer">
+  <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Web Alvaro — Hecho con pasión por el fútbol.</p>
+      <p class="footer-brand">Alvaro's Notebook</p>
+      <p class="footer-tag">Learning the game. Sharing the game.</p>
+      <p class="footer-copy">© 2026 Alvaro's Notebook</p>
     </div>
   </footer>
 

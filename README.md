@@ -1,25 +1,28 @@
-# Web Alvaro ⚽
+# Alvaro's Notebook ⚽
 
-Web de fútbol con noticias, clasificación y próximos partidos.
+> The Beautiful Game, One Note at a Time.
 
-## Estructura
+Football analysis, match reports and future stars — a young football analyst's journal. Each article is a "note" from Alvaro's notebook (e.g. *Notebook #27 — Why Spain controlled midfield against Italy*).
 
-- `index.html` — página principal
-- `css/styles.css` — estilos
-- `js/app.js` — datos y renderizado (de momento con datos de ejemplo)
+## Structure
 
-## Cómo verla en local
+- `index.html` — main page (notes, topics, about)
+- `css/styles.css` — notebook-style design (paper white, ink black, dark green)
+- `js/app.js` — notebook entries (sample data for now)
 
-Abre `index.html` en el navegador, o sirve la carpeta con:
+## Run locally
+
+Open `index.html` in a browser, or serve the folder:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-y visita <http://localhost:8000>.
+then visit <http://localhost:8000>.
 
-## Próximos pasos
+## Next steps
 
-- Conectar una API real de resultados (p. ej. [football-data.org](https://www.football-data.org/))
-- Añadir páginas de detalle de noticias
-- Publicar con GitHub Pages
+- Real notebook entries as individual pages
+- Logo and favicon
+- Publish with GitHub Pages
+- Register matching handles on YouTube, X, Instagram, TikTok
