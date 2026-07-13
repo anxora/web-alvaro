@@ -11,6 +11,7 @@ Uso:  python3 admin/server.py   (o doble clic en Administrar.command)
 import http.server
 import json
 import subprocess
+import sys
 import webbrowser
 from pathlib import Path
 
@@ -40,6 +41,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(REPO), **kwargs)
 
+    def end_headers(self):
+        # la vista previa local nunca debe servirse desde la caché del navegador
+        self.send_header("Cache-Control", "no-store, must-revalidate")
+        super().end_headers()
+
     def _json(self, code, obj):
         body = json.dumps(obj, ensure_ascii=False).encode()
         self.send_response(code)
@@ -66,8 +72,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     if clave not in data:
                         return self._json(400, {"ok": False, "error": f"Falta la sección '{clave}'"})
                 guardar_contenido(data)
+                print(f"[guardado] {len(data['notas'])} notas", file=sys.stderr, flush=True)
                 return self._json(200, {"ok": True, "mensaje": "Contenido guardado"})
             except Exception as e:
+                print(f"[error guardando] {e}", file=sys.stderr, flush=True)
                 return self._json(500, {"ok": False, "error": str(e)})
 
         if self.path == "/api/publish":
@@ -86,7 +94,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         return self._json(404, {"ok": False, "error": "Ruta desconocida"})
 
     def log_message(self, fmt, *args):
-        pass  # silencio en la terminal
+        print(fmt % args, file=sys.stderr, flush=True)
 
 
 if __name__ == "__main__":

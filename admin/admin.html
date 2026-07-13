@@ -162,9 +162,13 @@
 
     const $ = (id) => document.getElementById(id);
 
+    let temporizadorAuto = null;
+
     function marcarSucio() {
       sucio = true;
       $("estado").textContent = "● Cambios sin guardar";
+      clearTimeout(temporizadorAuto);
+      temporizadorAuto = setTimeout(() => guardar(true), 1200);
     }
 
     function marcarLimpio() {
@@ -191,7 +195,12 @@
     }
 
     async function cargar() {
-      C = await (await fetch("/api/content")).json();
+      try {
+        C = await (await fetch("/api/content")).json();
+      } catch (e) {
+        document.body.innerHTML = '<div style="max-width:34rem;margin:4rem auto;padding:2rem;background:#fbe9e7;border-radius:8px;font-family:sans-serif;"><h2>⚠️ El panel no puede cargar el contenido</h2><p>Abre el panel escribiendo <strong>http://localhost:8090/admin</strong> en el navegador (no abriendo el archivo directamente), y asegúrate de que el servidor está arrancado: doble clic en <strong>Administrar.command</strong>.</p></div>';
+        return;
+      }
       pintarNotas();
       pintarTemas();
       $("p-kicker").value = C.portada.kicker;
@@ -249,6 +258,7 @@
       const hoy = new Date().toISOString().slice(0, 10);
       C.notas.push({ numero: maxNum + 1, titulo: "Nuevo minuto", resumen: "", texto: "", fecha: hoy });
       seleccionar(C.notas.length - 1);
+      marcarSucio();
     }
 
     function borrarNota() {
@@ -278,12 +288,14 @@
     function nuevoTema() {
       C.temas.push({ titulo: "⚽ Nuevo tema", texto: "" });
       pintarTemas();
+      marcarSucio();
     }
 
     function borrarTema(i) {
       if (!confirm(`¿Eliminar el tema «${C.temas[i].titulo}»?`)) return;
       C.temas.splice(i, 1);
       pintarTemas();
+      marcarSucio();
     }
 
     // ---- Guardar y publicar ----
@@ -313,12 +325,26 @@
       n.texto = $("n-texto").value.trim();
     }
 
-    async function guardar() {
+    async function guardar(automatico = false) {
+      clearTimeout(temporizadorAuto);
       recogerFormulario();
       $("estado").textContent = "Guardando…";
-      const r = await (await fetch("/api/save", { method: "POST", body: JSON.stringify(C) })).json();
-      if (r.ok) marcarLimpio(); else $("estado").textContent = "● Cambios sin guardar";
-      aviso(r.ok ? "Guardado ✅ (mira la vista previa en «Ver la web»)" : "Error: " + r.error, 3500);
+      let r;
+      try {
+        r = await (await fetch("/api/save", { method: "POST", body: JSON.stringify(C) })).json();
+      } catch (e) {
+        $("estado").textContent = "● Cambios sin guardar";
+        aviso("⚠️ No puedo conectar con el servidor. Abre el panel desde http://localhost:8090/admin (no como archivo) y comprueba que el servidor está arrancado.", 6000);
+        return;
+      }
+      if (r.ok) {
+        marcarLimpio();
+        $("estado").textContent = automatico ? "Guardado automáticamente ✅" : "";
+      } else {
+        $("estado").textContent = "● Cambios sin guardar";
+      }
+      if (!automatico) aviso(r.ok ? "Guardado ✅ (mira la vista previa en «Ver la web»)" : "Error: " + r.error, 3500);
+      else if (!r.ok) aviso("Error al autoguardar: " + r.error, 4000);
       pintarNotas();
     }
 
