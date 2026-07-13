@@ -82,11 +82,34 @@ body {
 
 /* Hero */
 .hero {
-  text-align: center;
-  padding: 4.5rem 1rem 4rem;
+  padding: 3.5rem 1rem 0;
   border-bottom: 1px solid var(--line);
   background:
     linear-gradient(var(--paper) 0%, var(--green-soft) 160%);
+}
+
+.hero-flex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-text {
+  padding-bottom: 3.5rem;
+}
+
+.hero-sticker {
+  display: block;
+  max-height: 320px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .hero-flex { flex-direction: column; align-items: center; text-align: center; }
+  .hero-text { padding-bottom: 0; }
+  .hero-sticker { max-height: 240px; }
 }
 
 .hero-kicker {
@@ -107,7 +130,6 @@ body {
 .hero-sub {
   color: var(--ink-soft);
   max-width: 34rem;
-  margin: 0 auto;
 }
 
 .btn {

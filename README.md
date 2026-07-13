@@ -1,28 +1,28 @@
-# Alvaro's Notebook ⚽
+# 90 Minutos de Álvaro ⚽
 
-> The Beautiful Game, One Note at a Time.
+> El fútbol, minuto a minuto.
 
-Football analysis, match reports and future stars — a young football analyst's journal. Each article is a "note" from Alvaro's notebook (e.g. *Notebook #27 — Why Spain controlled midfield against Italy*).
+Análisis de partidos, táctica y futuras estrellas — el diario futbolero de Álvaro. Cada artículo es un "minuto" de su diario (p. ej. *Minuto 27′ — Por qué España controló el centro del campo contra Italia*).
 
-## Structure
+## Estructura
 
-- `index.html` — main page (notes, topics, about)
-- `css/styles.css` — notebook-style design (paper white, ink black, dark green)
-- `js/app.js` — notebook entries (sample data for now)
+- `index.html` — página principal (minutos, temas, sobre mí)
+- `css/styles.css` — diseño de cuaderno (papel, tinta, verde oscuro)
+- `js/app.js` — entradas del diario (datos de ejemplo por ahora)
+- `img/` — sticker de Álvaro (recorte de foto real) y favicon «90′»
 
-## Run locally
+## Ver en local
 
-Open `index.html` in a browser, or serve the folder:
+Abre `index.html` en el navegador, o sirve la carpeta:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-then visit <http://localhost:8000>.
+y visita <http://localhost:8000>.
 
-## Next steps
+## Próximos pasos
 
-- Real notebook entries as individual pages
-- Logo and favicon
-- Publish with GitHub Pages
-- Register matching handles on YouTube, X, Instagram, TikTok
+- Entradas reales como páginas individuales
+- Publicar con GitHub Pages
+- Registrar el mismo nombre en YouTube, X, Instagram y TikTok

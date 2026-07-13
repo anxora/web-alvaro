@@ -1,42 +1,42 @@
-// Sample notebook entries — replace with real posts as Alvaro writes them.
+// Entradas del diario — sustituir por las notas reales de Álvaro cuando las escriba.
 
-const notes = [
+const notas = [
   {
-    number: 27,
-    title: "Why Spain controlled midfield against Italy",
-    excerpt:
-      "Spain didn't win because of the goals. They won because their midfield always had one extra man. Here is how they did it.",
-    date: "2026-07-12",
+    numero: 27,
+    titulo: "Por qué España controló el centro del campo contra Italia",
+    resumen:
+      "España no ganó por los goles. Ganó porque en el mediocampo siempre tenía un hombre más. Así lo consiguieron.",
+    fecha: "2026-07-12",
   },
   {
-    number: 26,
-    title: "Three things I learned watching Arsenal today",
-    excerpt:
-      "The full-backs almost never crossed the halfway line at the same time. That small detail kept Arsenal safe all game.",
-    date: "2026-07-08",
+    numero: 26,
+    titulo: "Tres cosas que aprendí viendo al Arsenal",
+    resumen:
+      "Los laterales casi nunca pasaban del centro del campo a la vez. Ese pequeño detalle mantuvo al Arsenal seguro todo el partido.",
+    fecha: "2026-07-08",
   },
   {
-    number: 25,
-    title: "A wonderkid to remember: who is playing like a future star?",
-    excerpt:
-      "This week I watched a 17-year-old winger who always looks over his shoulder before receiving the ball. Scouts call it scanning.",
-    date: "2026-07-03",
+    numero: 25,
+    titulo: "Un futuro crack: ¿quién juega ya como una estrella?",
+    resumen:
+      "Esta semana vi a un extremo de 17 años que siempre mira por encima del hombro antes de recibir. Los ojeadores lo llaman escanear.",
+    fecha: "2026-07-03",
   },
 ];
 
-function renderNotes() {
+function renderNotas() {
   const grid = document.getElementById("notes-grid");
-  grid.innerHTML = notes
+  grid.innerHTML = notas
     .map(
       (n) => `
       <article class="note">
-        <p class="note-number">Notebook #${n.number}</p>
-        <h3>${n.title}</h3>
-        <p>${n.excerpt}</p>
-        <time datetime="${n.date}">${n.date}</time>
+        <p class="note-number">Minuto ${n.numero}&prime;</p>
+        <h3>${n.titulo}</h3>
+        <p>${n.resumen}</p>
+        <time datetime="${n.fecha}">${n.fecha}</time>
       </article>`
     )
     .join("");
 }
 
-document.addEventListener("DOMContentLoaded", renderNotes);
+document.addEventListener("DOMContentLoaded", renderNotas);
