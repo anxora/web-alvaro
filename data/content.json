@@ -1,0 +1,53 @@
+{
+  "portada": {
+    "kicker": "Análisis de partidos • Táctica • Futuras estrellas",
+    "titulo": "Cada partido enseña algo.\nYo lo apunto.",
+    "subtitulo": "¡Hola! Soy Álvaro. Cada semana veo fútbol, aprendo algo nuevo y comparto lo que descubro.",
+    "boton": "Leer mis minutos"
+  },
+  "notas": [
+    {
+      "numero": 27,
+      "titulo": "Por qué España controló el centro del campo contra Italia",
+      "resumen": "España no ganó por los goles. Ganó porque en el mediocampo siempre tenía un hombre más. Así lo consiguieron.",
+      "texto": "España no ganó por los goles. Ganó porque en el mediocampo siempre tenía un hombre más.\n\nCuando Italia presionaba, el pivote de España bajaba entre los centrales y los laterales subían. Así siempre había un pase fácil.\n\nLo que aprendí: no hace falta correr más que el rival si te colocas mejor que él.",
+      "fecha": "2026-07-12"
+    },
+    {
+      "numero": 26,
+      "titulo": "Tres cosas que aprendí viendo al Arsenal",
+      "resumen": "Los laterales casi nunca pasaban del centro del campo a la vez. Ese pequeño detalle mantuvo al Arsenal seguro todo el partido.",
+      "texto": "Los laterales casi nunca pasaban del centro del campo a la vez.\n\nPrimera cosa: si un lateral ataca, el otro se queda. Segunda: el delantero centro baja a recibir para hacer sitio a los extremos. Tercera: los saques de esquina cortos no son miedo, son paciencia.\n\nEse pequeño detalle de los laterales mantuvo al Arsenal seguro todo el partido.",
+      "fecha": "2026-07-08"
+    },
+    {
+      "numero": 25,
+      "titulo": "Un futuro crack: ¿quién juega ya como una estrella?",
+      "resumen": "Esta semana vi a un extremo de 17 años que siempre mira por encima del hombro antes de recibir. Los ojeadores lo llaman escanear.",
+      "texto": "Esta semana vi a un extremo de 17 años que siempre mira por encima del hombro antes de recibir.\n\nLos ojeadores lo llaman escanear: saber lo que vas a hacer con el balón antes de que llegue. Los mejores del mundo escanean hasta 8 veces en los 10 segundos antes de recibir.\n\nApunta su nombre, porque dentro de dos años lo conocerá todo el mundo.",
+      "fecha": "2026-07-03"
+    }
+  ],
+  "temas": [
+    {
+      "titulo": "📋 Análisis de partidos",
+      "texto": "No solo el resultado: por qué un equipo dominó el centro del campo y dónde se ganó y se perdió el partido."
+    },
+    {
+      "titulo": "🧠 Táctica",
+      "texto": "Formaciones, presión, salida de balón... las ideas detrás del juego, explicadas de forma sencilla."
+    },
+    {
+      "titulo": "⭐ Futuras estrellas",
+      "texto": "Jóvenes talentos a los que seguir antes de que todo el mundo conozca su nombre."
+    }
+  ],
+  "sobreMi": {
+    "saludo": "¡Hola! Soy Álvaro.",
+    "texto": "Empecé este diario con 8 años porque me encanta el fútbol. Cada semana veo partidos, aprendo algo nuevo y lo apunto. Mi objetivo es convertirme en uno de los mejores comunicadores de fútbol del mundo.",
+    "firma": "— Álvaro"
+  },
+  "pie": {
+    "lema": "Aprendiendo el juego. Compartiendo el juego."
+  }
+}

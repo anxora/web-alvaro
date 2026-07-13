@@ -29,10 +29,10 @@
   <section class="hero">
     <div class="container hero-flex">
       <div class="hero-text">
-        <p class="hero-kicker">Análisis de partidos • Táctica • Futuras estrellas</p>
-        <h1>Cada partido enseña algo.<br>Yo lo apunto.</h1>
-        <p class="hero-sub">¡Hola! Soy Álvaro. Cada semana veo fútbol, aprendo algo nuevo y comparto lo que descubro.</p>
-        <a href="#minutos" class="btn">Leer mis minutos</a>
+        <p class="hero-kicker" id="hero-kicker">Análisis de partidos • Táctica • Futuras estrellas</p>
+        <h1 id="hero-title">Cada partido enseña algo.<br>Yo lo apunto.</h1>
+        <p class="hero-sub" id="hero-sub">¡Hola! Soy Álvaro. Cada semana veo fútbol, aprendo algo nuevo y comparto lo que descubro.</p>
+        <a href="#minutos" class="btn" id="hero-btn">Leer mis minutos</a>
       </div>
       <img class="hero-sticker" src="img/sticker-alvaro.webp" alt="Álvaro con el pulgar arriba">
     </div>
@@ -48,28 +48,17 @@
 
     <section id="temas" class="section">
       <h2>Sobre qué escribo</h2>
-      <div class="topics">
-        <div class="topic">
-          <h3>📋 Análisis de partidos</h3>
-          <p>No solo el resultado: por qué un equipo dominó el centro del campo y dónde se ganó y se perdió el partido.</p>
-        </div>
-        <div class="topic">
-          <h3>🧠 Táctica</h3>
-          <p>Formaciones, presión, salida de balón... las ideas detrás del juego, explicadas de forma sencilla.</p>
-        </div>
-        <div class="topic">
-          <h3>⭐ Futuras estrellas</h3>
-          <p>Jóvenes talentos a los que seguir antes de que todo el mundo conozca su nombre.</p>
-        </div>
+      <div class="topics" id="topics">
+        <!-- Se rellena desde data/content.js -->
       </div>
     </section>
 
     <section id="sobre-mi" class="section about">
       <h2>Sobre mí</h2>
       <div class="about-card">
-        <p class="about-lead">¡Hola! Soy Álvaro.</p>
-        <p>Empecé este diario con 8 años porque me encanta el fútbol. Cada semana veo partidos, aprendo algo nuevo y lo apunto. Mi objetivo es convertirme en uno de los mejores comunicadores de fútbol del mundo.</p>
-        <p class="about-sign">— Álvaro</p>
+        <p class="about-lead" id="about-lead">¡Hola! Soy Álvaro.</p>
+        <p id="about-text">Empecé este diario con 8 años porque me encanta el fútbol.</p>
+        <p class="about-sign" id="about-sign">— Álvaro</p>
       </div>
     </section>
   </main>
@@ -77,11 +66,12 @@
   <footer class="site-footer">
     <div class="container">
       <p class="footer-brand">90 Minutos <em>de Álvaro</em></p>
-      <p class="footer-tag">Aprendiendo el juego. Compartiendo el juego.</p>
+      <p class="footer-tag" id="footer-tag">Aprendiendo el juego. Compartiendo el juego.</p>
       <p class="footer-copy">© 2026 90 Minutos de Álvaro</p>
     </div>
   </footer>
 
+  <script src="data/content.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

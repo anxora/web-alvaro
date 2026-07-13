@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minuto — 90 Minutos de Álvaro</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-name">90 Minutos <em>de Álvaro</em></span>
+        <span class="brand-tagline">El fútbol, minuto a minuto</span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html#minutos">Minutos</a>
+        <a href="index.html#temas">Temas</a>
+        <a href="index.html#sobre-mi">Sobre mí</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="article" id="article">
+      <p>Cargando…</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-brand">90 Minutos <em>de Álvaro</em></p>
+      <p class="footer-tag" id="footer-tag"></p>
+      <p class="footer-copy">© 2026 90 Minutos de Álvaro</p>
+    </div>
+  </footer>
+
+  <script src="data/content.js"></script>
+  <script>
+    const C = window.CONTENIDO;
+    const esc = (s) => String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    document.getElementById("footer-tag").textContent = C.pie.lema;
+
+    const num = new URLSearchParams(location.search).get("n");
+    const nota = C.notas.find((x) => String(x.numero) === String(num));
+    const el = document.getElementById("article");
+    if (!nota) {
+      el.innerHTML = '<p>No encuentro ese minuto. <a href="index.html">Volver a la portada</a>.</p>';
+    } else {
+      document.title = `Minuto ${nota.numero}′ — 90 Minutos de Álvaro`;
+      const cuerpo = esc(nota.texto || nota.resumen)
+        .split(/\n\s*\n/)
+        .map((p) => `<p>${p.replaceAll("\n", "<br>")}</p>`)
+        .join("");
+      el.innerHTML = `
+        <p class="note-number">Minuto ${esc(nota.numero)}&prime;</p>
+        <h1>${esc(nota.titulo)}</h1>
+        <time datetime="${esc(nota.fecha)}">${esc(nota.fecha)}</time>
+        <div class="article-body">${cuerpo}</div>
+        <a class="btn article-back" href="index.html#minutos">← Todos los minutos</a>`;
+    }
+  </script>
+</body>
+</html>

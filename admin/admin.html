@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — 90 Minutos de Álvaro</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --paper: #fdfcf8; --ink: #1c1c1c; --ink-soft: #5a584f;
+      --green: #14532d; --green-soft: #eaf2ec; --line: #e4e1d8;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.55; padding-bottom: 5rem; }
+    .top {
+      position: sticky; top: 0; z-index: 10; background: var(--green); color: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 1.5rem; gap: 1rem; flex-wrap: wrap;
+    }
+    .top h1 { font-family: var(--serif); font-size: 1.15rem; font-weight: bold; }
+    .top .acciones { display: flex; gap: 0.6rem; align-items: center; }
+    .estado { font-size: 0.85rem; opacity: 0.95; }
+    button {
+      font-family: var(--sans); font-size: 0.92rem; font-weight: 600;
+      border: none; border-radius: 6px; padding: 0.55rem 1.2rem; cursor: pointer;
+    }
+    .btn-guardar { background: #fdfcf8; color: var(--green); }
+    .btn-publicar { background: #ffd700; color: #1c1c1c; }
+    .btn-sec { background: var(--green-soft); color: var(--green); }
+    .btn-peligro { background: #fbe9e7; color: #b3261e; }
+    button:hover { filter: brightness(0.96); }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+    .tarjeta {
+      background: #fff; border: 1px solid var(--line); border-radius: 8px;
+      padding: 1.4rem 1.6rem; margin-bottom: 1.5rem;
+    }
+    .tarjeta h2 {
+      font-family: var(--serif); font-size: 1.25rem; margin-bottom: 1rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--line);
+    }
+    label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); margin: 0.9rem 0 0.25rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    input, textarea {
+      width: 100%; font-family: var(--sans); font-size: 0.95rem; color: var(--ink);
+      border: 1px solid var(--line); border-radius: 6px; padding: 0.55rem 0.7rem; background: var(--paper);
+    }
+    textarea { resize: vertical; min-height: 4.5rem; }
+    textarea.grande { min-height: 10rem; }
+    input:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+    .fila { display: flex; gap: 1rem; }
+    .fila > div { flex: 1; }
+    .lista-notas { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+    .item-nota {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      border: 1px solid var(--line); border-radius: 6px; padding: 0.6rem 0.9rem; background: var(--paper);
+      cursor: pointer;
+    }
+    .item-nota:hover { border-color: var(--green); }
+    .item-nota.activo { border-color: var(--green); background: var(--green-soft); }
+    .item-nota .min { font-weight: 700; color: var(--green); white-space: nowrap; }
+    .item-nota .tit { flex: 1; font-size: 0.93rem; }
+    .item-nota .fec { font-size: 0.8rem; color: var(--ink-soft); white-space: nowrap; }
+    .editor-nota { border-top: 2px solid var(--green-soft); margin-top: 1rem; padding-top: 0.5rem; }
+    .editor-acciones { display: flex; gap: 0.6rem; margin-top: 1.1rem; flex-wrap: wrap; }
+    .tema { border: 1px solid var(--line); border-radius: 6px; padding: 0.9rem; margin-bottom: 0.8rem; background: var(--paper); }
+    .tema .fila-tema { display: flex; justify-content: flex-end; margin-top: 0.5rem; }
+    .aviso {
+      position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+      background: var(--ink); color: #fff; border-radius: 8px; padding: 0.7rem 1.4rem;
+      font-size: 0.92rem; opacity: 0; transition: opacity 0.25s; pointer-events: none; max-width: 90vw;
+    }
+    .aviso.ver { opacity: 1; }
+    .ayuda { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.3rem; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <h1>⚽ Admin — 90 Minutos de Álvaro</h1>
+    <div class="acciones">
+      <span class="estado" id="estado"></span>
+      <button class="btn-sec" onclick="window.open('/', '_blank')">Ver la web</button>
+      <button class="btn-guardar" onclick="guardar()">💾 Guardar</button>
+      <button class="btn-publicar" onclick="publicar()">🚀 Publicar</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="tarjeta">
+      <h2>✍️ Minutos (artículos)</h2>
+      <div class="lista-notas" id="lista-notas"></div>
+      <button class="btn-sec" onclick="nuevaNota()">＋ Nuevo minuto</button>
+
+      <div class="editor-nota" id="editor-nota" hidden>
+        <div class="fila">
+          <div>
+            <label>Número de minuto</label>
+            <input type="number" id="n-numero">
+          </div>
+          <div>
+            <label>Fecha</label>
+            <input type="date" id="n-fecha">
+          </div>
+        </div>
+        <label>Título</label>
+        <input id="n-titulo" placeholder="Por qué el Madrid ganó sin tener el balón">
+        <label>Resumen (aparece en la portada)</label>
+        <textarea id="n-resumen"></textarea>
+        <label>Texto completo</label>
+        <textarea id="n-texto" class="grande" placeholder="Escribe el análisis. Deja una línea en blanco para separar párrafos."></textarea>
+        <p class="ayuda">Deja una línea en blanco entre párrafos. El artículo se ve en su propia página al hacer clic en la tarjeta.</p>
+        <div class="editor-acciones">
+          <button class="btn-sec" onclick="aplicarNota()">Aplicar cambios al minuto</button>
+          <button class="btn-peligro" onclick="borrarNota()">Eliminar este minuto</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>🏠 Portada</h2>
+      <label>Línea pequeña de arriba (kicker)</label>
+      <input id="p-kicker">
+      <label>Título grande</label>
+      <textarea id="p-titulo"></textarea>
+      <p class="ayuda">Cada línea del cuadro es una línea del título.</p>
+      <label>Texto de presentación</label>
+      <textarea id="p-subtitulo"></textarea>
+      <label>Texto del botón</label>
+      <input id="p-boton">
+    </div>
+
+    <div class="tarjeta">
+      <h2>🧩 Temas («Sobre qué escribo»)</h2>
+      <div id="temas"></div>
+      <button class="btn-sec" onclick="nuevoTema()">＋ Añadir tema</button>
+    </div>
+
+    <div class="tarjeta">
+      <h2>🙋 Sobre mí</h2>
+      <label>Saludo</label>
+      <input id="s-saludo">
+      <label>Texto</label>
+      <textarea id="s-texto" class="grande"></textarea>
+      <label>Firma</label>
+      <input id="s-firma">
+    </div>
+
+    <div class="tarjeta">
+      <h2>🦶 Pie de página</h2>
+      <label>Lema</label>
+      <input id="f-lema">
+    </div>
+
+  </div>
+
+  <div class="aviso" id="aviso"></div>
+
+  <script>
+    let C = null;
+    let notaSel = -1;
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+
+    function aviso(msg, ms = 2600) {
+      $("aviso").textContent = msg;
+      $("aviso").classList.add("ver");
+      setTimeout(() => $("aviso").classList.remove("ver"), ms);
+    }
+
+    async function cargar() {
+      C = await (await fetch("/api/content")).json();
+      pintarNotas();
+      pintarTemas();
+      $("p-kicker").value = C.portada.kicker;
+      $("p-titulo").value = C.portada.titulo;
+      $("p-subtitulo").value = C.portada.subtitulo;
+      $("p-boton").value = C.portada.boton;
+      $("s-saludo").value = C.sobreMi.saludo;
+      $("s-texto").value = C.sobreMi.texto;
+      $("s-firma").value = C.sobreMi.firma;
+      $("f-lema").value = C.pie.lema;
+    }
+
+    // ---- Minutos ----
+    function pintarNotas() {
+      const orden = [...C.notas].sort((a, b) => b.numero - a.numero);
+      $("lista-notas").innerHTML = orden.map((n) => {
+        const i = C.notas.indexOf(n);
+        return `<div class="item-nota ${i === notaSel ? "activo" : ""}" onclick="seleccionar(${i})">
+          <span class="min">Minuto ${esc(n.numero)}′</span>
+          <span class="tit">${esc(n.titulo)}</span>
+          <span class="fec">${esc(n.fecha)}</span>
+        </div>`;
+      }).join("");
+    }
+
+    function seleccionar(i) {
+      notaSel = i;
+      const n = C.notas[i];
+      $("editor-nota").hidden = false;
+      $("n-numero").value = n.numero;
+      $("n-fecha").value = n.fecha;
+      $("n-titulo").value = n.titulo;
+      $("n-resumen").value = n.resumen;
+      $("n-texto").value = n.texto || "";
+      pintarNotas();
+      $("editor-nota").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function nuevaNota() {
+      const maxNum = C.notas.reduce((m, n) => Math.max(m, Number(n.numero) || 0), 0);
+      const hoy = new Date().toISOString().slice(0, 10);
+      C.notas.push({ numero: maxNum + 1, titulo: "Nuevo minuto", resumen: "", texto: "", fecha: hoy });
+      seleccionar(C.notas.length - 1);
+    }
+
+    function aplicarNota() {
+      if (notaSel < 0) return;
+      const n = C.notas[notaSel];
+      n.numero = Number($("n-numero").value) || n.numero;
+      n.fecha = $("n-fecha").value || n.fecha;
+      n.titulo = $("n-titulo").value.trim();
+      n.resumen = $("n-resumen").value.trim();
+      n.texto = $("n-texto").value.trim();
+      pintarNotas();
+      aviso("Minuto actualizado. Recuerda Guardar 💾");
+    }
+
+    function borrarNota() {
+      if (notaSel < 0) return;
+      const n = C.notas[notaSel];
+      if (!confirm(`¿Eliminar el Minuto ${n.numero}′ «${n.titulo}»?`)) return;
+      C.notas.splice(notaSel, 1);
+      notaSel = -1;
+      $("editor-nota").hidden = true;
+      pintarNotas();
+      aviso("Minuto eliminado. Recuerda Guardar 💾");
+    }
+
+    // ---- Temas ----
+    function pintarTemas() {
+      $("temas").innerHTML = C.temas.map((t, i) => `
+        <div class="tema">
+          <label>Título</label>
+          <input value="${esc(t.titulo)}" oninput="C.temas[${i}].titulo = this.value">
+          <label>Texto</label>
+          <textarea oninput="C.temas[${i}].texto = this.value">${esc(t.texto)}</textarea>
+          <div class="fila-tema"><button class="btn-peligro" onclick="borrarTema(${i})">Eliminar</button></div>
+        </div>`).join("");
+    }
+
+    function nuevoTema() {
+      C.temas.push({ titulo: "⚽ Nuevo tema", texto: "" });
+      pintarTemas();
+    }
+
+    function borrarTema(i) {
+      if (!confirm(`¿Eliminar el tema «${C.temas[i].titulo}»?`)) return;
+      C.temas.splice(i, 1);
+      pintarTemas();
+    }
+
+    // ---- Guardar y publicar ----
+    function recogerFormulario() {
+      C.portada = {
+        kicker: $("p-kicker").value.trim(),
+        titulo: $("p-titulo").value.trim(),
+        subtitulo: $("p-subtitulo").value.trim(),
+        boton: $("p-boton").value.trim(),
+      };
+      C.sobreMi = {
+        saludo: $("s-saludo").value.trim(),
+        texto: $("s-texto").value.trim(),
+        firma: $("s-firma").value.trim(),
+      };
+      C.pie = { lema: $("f-lema").value.trim() };
+      if (notaSel >= 0 && !$("editor-nota").hidden) aplicarNotaSilencioso();
+    }
+
+    function aplicarNotaSilencioso() {
+      const n = C.notas[notaSel];
+      if (!n) return;
+      n.numero = Number($("n-numero").value) || n.numero;
+      n.fecha = $("n-fecha").value || n.fecha;
+      n.titulo = $("n-titulo").value.trim();
+      n.resumen = $("n-resumen").value.trim();
+      n.texto = $("n-texto").value.trim();
+    }
+
+    async function guardar() {
+      recogerFormulario();
+      $("estado").textContent = "Guardando…";
+      const r = await (await fetch("/api/save", { method: "POST", body: JSON.stringify(C) })).json();
+      $("estado").textContent = "";
+      aviso(r.ok ? "Guardado ✅ (mira la vista previa en «Ver la web»)" : "Error: " + r.error, 3500);
+      pintarNotas();
+    }
+
+    async function publicar() {
+      recogerFormulario();
+      $("estado").textContent = "Guardando…";
+      const g = await (await fetch("/api/save", { method: "POST", body: JSON.stringify(C) })).json();
+      if (!g.ok) { $("estado").textContent = ""; return aviso("Error al guardar: " + g.error, 4000); }
+      $("estado").textContent = "Publicando en GitHub…";
+      const r = await (await fetch("/api/publish", { method: "POST" })).json();
+      $("estado").textContent = "";
+      aviso(r.ok ? r.mensaje : "Error al publicar: " + r.error, 4500);
+    }
+
+    cargar();
+  </script>
+</body>
+</html>
